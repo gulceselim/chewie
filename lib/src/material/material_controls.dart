@@ -602,6 +602,8 @@ class _MaterialControlsState extends State<MaterialControls>
             _dragging = true;
           });
 
+          widget.onTapToUpdateCurrentPosition!(_subtitlesPosition);
+
           _hideTimer?.cancel();
         },
         onDragEnd: () {
