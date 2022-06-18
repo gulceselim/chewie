@@ -94,7 +94,7 @@ class _MaterialControlsState extends State<MaterialControls>
             children: [
               if (widget.backgroundImage != null)
                 Container(
-                  color: const Color.fromRGBO(240, 240, 240, 1),
+                  color: const Color.fromRGBO(180, 180, 180, 1),
                   child: Center(child: widget.backgroundImage),
                 ),
               if (_displayBufferingIndicator)
