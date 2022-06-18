@@ -589,7 +589,6 @@ class _MaterialControlsState extends State<MaterialControls>
 
     setState(() {
       _latestValue = controller.value;
-      widget.onTapToUpdateCurrentPosition!(_latestValue.position);
       _subtitlesPosition = controller.value.position;
     });
   }
@@ -609,6 +608,8 @@ class _MaterialControlsState extends State<MaterialControls>
           setState(() {
             _dragging = false;
           });
+
+          widget.onTapToUpdateCurrentPosition!(_subtitlesPosition);
 
           _startHideTimer();
         },
