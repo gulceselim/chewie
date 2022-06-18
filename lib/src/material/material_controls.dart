@@ -16,11 +16,17 @@ import 'package:video_player/video_player.dart';
 
 class MaterialControls extends StatefulWidget {
   const MaterialControls({
-    this.showPlayButton = true,
     Key? key,
+    this.showPlayButton = true,
+    this.onTapToPause,
+    this.onTapToPlay,
+    this.onTapToUpdateCurrentPosition,
   }) : super(key: key);
 
   final bool showPlayButton;
+  final Function()? onTapToPause;
+  final Function()? onTapToPlay;
+  final Function(Duration currentPosition)? onTapToUpdateCurrentPosition;
 
   @override
   State<StatefulWidget> createState() {
@@ -524,18 +530,21 @@ class _MaterialControlsState extends State<MaterialControls>
         notifier.hideStuff = false;
         _hideTimer?.cancel();
         controller.pause();
+        widget.onTapToPause!();
       } else {
         _cancelAndRestartTimer();
 
         if (!controller.value.isInitialized) {
           controller.initialize().then((_) {
             controller.play();
+            widget.onTapToPlay!();
           });
         } else {
           if (isFinished) {
             controller.seekTo(Duration.zero);
           }
           controller.play();
+          widget.onTapToPlay!();
         }
       }
     });
@@ -580,6 +589,7 @@ class _MaterialControlsState extends State<MaterialControls>
 
     setState(() {
       _latestValue = controller.value;
+      widget.onTapToUpdateCurrentPosition!(_latestValue.position);
       _subtitlesPosition = controller.value.position;
     });
   }
