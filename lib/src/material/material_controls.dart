@@ -24,8 +24,8 @@ class MaterialControls extends StatefulWidget {
   }) : super(key: key);
 
   final bool showPlayButton;
-  final Function()? onTapToPause;
-  final Function()? onTapToPlay;
+  final Function(Duration currentPosition)? onTapToPause;
+  final Function(Duration currentPosition)? onTapToPlay;
   final Function(Duration currentPosition)? onTapToUpdateCurrentPosition;
 
   @override
@@ -530,21 +530,21 @@ class _MaterialControlsState extends State<MaterialControls>
         notifier.hideStuff = false;
         _hideTimer?.cancel();
         controller.pause();
-        widget.onTapToPause!();
+        widget.onTapToPause!(_subtitlesPosition);
       } else {
         _cancelAndRestartTimer();
 
         if (!controller.value.isInitialized) {
           controller.initialize().then((_) {
             controller.play();
-            widget.onTapToPlay!();
+            widget.onTapToPlay!(_subtitlesPosition);
           });
         } else {
           if (isFinished) {
             controller.seekTo(Duration.zero);
           }
           controller.play();
-          widget.onTapToPlay!();
+          widget.onTapToPlay!(_subtitlesPosition);
         }
       }
     });
