@@ -90,6 +90,7 @@ class _MaterialControlsState extends State<MaterialControls>
           absorbing: notifier.hideStuff,
           child: Stack(
             children: [
+              Container(color: Colors.amber),
               if (_displayBufferingIndicator)
                 const Center(
                   child: CircularProgressIndicator(),
