@@ -93,7 +93,10 @@ class _MaterialControlsState extends State<MaterialControls>
           child: Stack(
             children: [
               if (widget.backgroundImage != null)
-                Container(child: widget.backgroundImage),
+                Container(
+                  color: const Color.fromRGBO(240, 240, 240, 1),
+                  child: Center(child: widget.backgroundImage),
+                ),
               if (_displayBufferingIndicator)
                 const Center(
                   child: CircularProgressIndicator(),
