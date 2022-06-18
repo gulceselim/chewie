@@ -22,13 +22,19 @@ class MaterialControls extends StatefulWidget {
     this.onTapToPlay,
     this.onTapToUpdateCurrentPosition,
     this.backgroundImage,
-  }) : super(key: key);
+    this.backgroundColor,
+  })  : assert(
+          (backgroundImage != null && backgroundColor != null) ||
+              (backgroundImage == null && backgroundColor == null),
+        ),
+        super(key: key);
 
   final bool showPlayButton;
   final Function(Duration currentPosition)? onTapToPause;
   final Function(Duration currentPosition)? onTapToPlay;
   final Function(Duration currentPosition)? onTapToUpdateCurrentPosition;
   final Image? backgroundImage;
+  final Color? backgroundColor;
 
   @override
   State<StatefulWidget> createState() {
@@ -94,7 +100,7 @@ class _MaterialControlsState extends State<MaterialControls>
             children: [
               if (widget.backgroundImage != null)
                 Container(
-                  color: const Color.fromRGBO(220, 220, 220, 1),
+                  color: widget.backgroundColor,
                   child: Center(child: widget.backgroundImage),
                 ),
               if (_displayBufferingIndicator)
