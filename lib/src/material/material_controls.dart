@@ -602,8 +602,6 @@ class _MaterialControlsState extends State<MaterialControls>
             _dragging = true;
           });
 
-          widget.onTapToUpdateCurrentPosition!(_subtitlesPosition);
-
           _hideTimer?.cancel();
         },
         onDragEnd: () {
@@ -614,6 +612,9 @@ class _MaterialControlsState extends State<MaterialControls>
           widget.onTapToUpdateCurrentPosition!(_subtitlesPosition);
 
           _startHideTimer();
+        },
+        onDragUpdate: () {
+          widget.onTapToUpdateCurrentPosition!(_subtitlesPosition);
         },
         colors: chewieController.materialProgressColors ??
             ChewieProgressColors(
