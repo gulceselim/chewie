@@ -21,12 +21,14 @@ class MaterialControls extends StatefulWidget {
     this.onTapToPause,
     this.onTapToPlay,
     this.onTapToUpdateCurrentPosition,
+    this.backgroundImage,
   }) : super(key: key);
 
   final bool showPlayButton;
   final Function(Duration currentPosition)? onTapToPause;
   final Function(Duration currentPosition)? onTapToPlay;
   final Function(Duration currentPosition)? onTapToUpdateCurrentPosition;
+  final Image? backgroundImage;
 
   @override
   State<StatefulWidget> createState() {
@@ -90,7 +92,8 @@ class _MaterialControlsState extends State<MaterialControls>
           absorbing: notifier.hideStuff,
           child: Stack(
             children: [
-              Container(color: Colors.amber),
+              if (widget.backgroundImage != null)
+                Container(child: widget.backgroundImage),
               if (_displayBufferingIndicator)
                 const Center(
                   child: CircularProgressIndicator(),
