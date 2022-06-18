@@ -613,8 +613,8 @@ class _MaterialControlsState extends State<MaterialControls>
 
           _startHideTimer();
         },
-        onDragUpdate: () {
-          widget.onTapToUpdateCurrentPosition!(_subtitlesPosition);
+        onTapDown: (currentPosition) {
+          widget.onTapToUpdateCurrentPosition!(currentPosition);
         },
         colors: chewieController.materialProgressColors ??
             ChewieProgressColors(
